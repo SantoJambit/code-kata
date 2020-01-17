@@ -1,6 +1,10 @@
 import * as fs from "fs";
+import { getArguments, StopWatch } from "./lib";
 
+const stopWatch = new StopWatch();
+stopWatch.start('Reading wordlist');
 const words = fs.readFileSync("./wordlist.txt", "utf8").split(/\r?\n/);
+stopWatch.stop();
 
 interface WordLeaf {
     word: string;
@@ -77,19 +81,28 @@ function gatherPaths(tree: WordLeaf, to: string, walkedWords: string[], depth: n
     }
 }
 
-function test(from: string, to: string) {
+function run(from: string, to: string) {
     const lenMin = from.length > to.length ? to.length : from.length;
     const lenMax = from.length < to.length ? to.length : from.length;
+    const range = lenMin !== lenMax ? `${lenMin} - ${lenMax}` : lenMin;
+    stopWatch.start(`Getting all ${range} character words`);
     const possibleStepWords = words.filter((word) => word.length >= lenMin && word.length <= lenMax);
+    stopWatch.stop();
 
+    stopWatch.start(`Generating Word Tree`);
     const tree = getWordTree(from, possibleStepWords);
+    stopWatch.stop();
 
-    for (let i = 1; paths.length === 0; i++)
+    for (let i = 1; paths.length === 0; i++) {
+        stopWatch.start(`Gathering paths for a maximum depth of ${i}`);
         gatherPaths(tree, to, [], i);
+        stopWatch.stop();
+    }
 
-    paths.sort((a, b) => a.length - b.length);
-    console.log(paths);
+    console.log('Shortest path(s):');
+    for(const path of paths)
+        console.log(' - ' + [from, ...path, to].join(' -> '));
 }
-// "cat", "cot", "cog", "dog"
 
-test("duck", "dogma");
+const args = getArguments(2);
+run(args[0], args[1]);
