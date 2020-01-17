@@ -6,11 +6,32 @@ stopWatch.start('Reading wordlist');
 const words = fs.readFileSync("./wordlist.txt", "utf8").split(/\r?\n/);
 stopWatch.stop();
 
-interface WordLeaf {
-    word: string;
-    leafs: WordLeaf[];
-    words: string[];
+enum WordLeafType {
+    FROM,
+    TO,
+    STEP
+};
+
+class WordLeaf {
+    private _leafs?: WordLeaf[];
+    public constructor(
+        public readonly word: string,
+        public readonly type: WordLeafType = WordLeafType.STEP
+    ) {
+    }
+
+    public get leafs() {
+        if (!this._leafs) {
+            if (this.type === WordLeafType.TO)
+                this._leafs = [];
+            else
+                this._leafs = getWordGoals(this.word)
+                    .map((word) => getLeaf(word));
+        }
+        return this._leafs;
+    }
 }
+const leafMap: { [s: string]: WordLeaf } = {};
 
 function isOneCharDiff(a: string, b: string) {
     let diff = 0;
@@ -36,8 +57,8 @@ function isOneCharAdded(short: string, long: string) {
     return added;
 }
 
-function getWordGoals(word: string, possibleWords: string[]): string[] {
-    return possibleWords.filter((otherWord) => {
+function getWordGoals(word: string): string[] {
+    return words.filter((otherWord) => {
         if (word === otherWord)
             return false;
         if (word.length === otherWord.length && isOneCharDiff(word, otherWord))
@@ -49,60 +70,45 @@ function getWordGoals(word: string, possibleWords: string[]): string[] {
     });
 }
 
-function getWordTree(word: string, possibleWords: string[]): WordLeaf {
-    const leafMap: { [s: string]: WordLeaf } = {};
-    for (const w of possibleWords) {
-        leafMap[w] = {
-            word: w,
-            leafs: [],
-            words: getWordGoals(w, possibleWords)
-        };
-    }
-    for (const w of possibleWords) {
-        const leaf = leafMap[w];
-        leaf.leafs = leaf.words.map((w2) => leafMap[w2]);
-    }
-
-    return leafMap[word];
+function getLeaf(word: string, type: WordLeafType = WordLeafType.STEP): WordLeaf {
+    let leaf = leafMap[word];
+    if (!leaf)
+        leaf = leafMap[word] = new WordLeaf(word, type);
+    return leaf;
 }
 
 const paths: string[][] = [];
-function gatherPaths(tree: WordLeaf, to: string, walkedWords: string[], depth: number) {
+function gatherPaths(from: WordLeaf, walkedWords: string[], depth: number) {
     if (depth === 0)
         return;
-    if (tree.leafs.some((leaf) => leaf.word === to)) {
+    if (from.leafs.some((leaf) => leaf.type === WordLeafType.TO)) {
         paths.push(walkedWords);
         return;
     }
 
-    for (const leaf of tree.leafs) {
+    for (const leaf of from.leafs) {
         if (walkedWords.indexOf(leaf.word) < 0)
-            gatherPaths(leaf, to, [...walkedWords, leaf.word], depth - 1);
+            gatherPaths(leaf, [...walkedWords, leaf.word], depth - 1);
     }
 }
 
 function run(from: string, to: string) {
-    const lenMin = from.length > to.length ? to.length : from.length;
-    const lenMax = from.length < to.length ? to.length : from.length;
-    const range = lenMin !== lenMax ? `${lenMin} - ${lenMax}` : lenMin;
-    stopWatch.start(`Getting all ${range} character words`);
-    const possibleStepWords = words.filter((word) => word.length >= lenMin && word.length <= lenMax);
-    stopWatch.stop();
-
-    stopWatch.start(`Generating Word Tree`);
-    const tree = getWordTree(from, possibleStepWords);
+    stopWatch.start(`Creating from and to leafs`);
+    const fromLeaf = getLeaf(from, WordLeafType.FROM);
+    getLeaf(to, WordLeafType.TO);
     stopWatch.stop();
 
     for (let i = 1; paths.length === 0; i++) {
-        stopWatch.start(`Gathering paths for a maximum depth of ${i}`);
-        gatherPaths(tree, to, [], i);
+        stopWatch.start(`Gathering paths for a maximum of ${i} steps`);
+        gatherPaths(fromLeaf, [], i);
         stopWatch.stop();
     }
 
     console.log('Shortest path(s):');
-    for(const path of paths)
+    for (const path of paths)
         console.log(' - ' + [from, ...path, to].join(' -> '));
 }
 
 const args = getArguments(2);
 run(args[0], args[1]);
+stopWatch.finish();

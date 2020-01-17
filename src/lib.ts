@@ -9,6 +9,7 @@ export function getArguments(count: number) {
 }
 
 export class StopWatch {
+    private creationTime = Date.now();
     private startTime = Date.now();
     public start(task: string) {
         this.startTime = Date.now();
@@ -16,5 +17,9 @@ export class StopWatch {
     }
     public stop() {
         console.log(` -> ${Date.now() - this.startTime}ms to complete task\n`);
+    }
+
+    public finish() {
+        console.log(`\n Done => ${Date.now() - this.creationTime}ms to finish\n`);
     }
 }
