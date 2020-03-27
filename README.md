@@ -6,9 +6,11 @@ Jambit Code-Kata Roman Numerals
 We all know Roman Numerals, if not take a quick look at: http://www.novaroma.org/via_romana/numbers.html
 
 1. **Convert normal numbers to Roman Numerals**\
-Write a function/method/class/program that takes as input a normal number and converts it to a Roman numeral. There is no need to convert numbers larger than 3000.
+Write a function/method/class/program that takes as input a normal number and converts it to a Roman numeral.
 2. **Convert Roman Numerals to normal number**\
-Write a function/method/class/program that takes as input a Roman Numeral and converts it to a normal number. There is no need to convert numbers larger than 3000.
+Write a function/method/class/program that takes as input a Roman Numeral and converts it to a normal number.
+
+There is no need to convert numbers larger than 3000.
 
 ## Results
 
