@@ -1,60 +1,20 @@
 # jambit-kata
-Jambit Code-Kata Word-Puzzle
+Jambit Code-Kata Roman Numerals
 
-## Task
+## Tasks
 
-Given two words of equal length, write a program that can build a chain of words connecting the first to the second. Each word in the chain must be in this word list and every step along the chain changes only one letter from the previous word. For example, given the start word "cat" and the end word "dog", a valid chain would be:
+We all know Roman Numerals, if not take a quick look at: http://www.novaroma.org/via_romana/numbers.html
 
-```
-"cat", "cot", "cog", "dog"
-```
-Another example "duck" to "ruby" would have a valid word chain:
-```
-"duck", "ruck", "rusk", "ruse", "rube", "ruby"
-```
-
-If you get your code working, try timing it. Does it take less than a second for the above examples? And is the timing the same forwards and backwards? Does your code find the shortest possible valid word chain?
-
-The dictionary can be found here: https://nwrug.org/words.txt
+1. **Convert normal numbers to Roman Numerals**\
+Write a function/method/class/program that takes as input a normal number and converts it to a Roman numeral. There is no need to convert numbers larger than 3000.
+2. **Convert Roman Numerals to normal number**\
+Write a function/method/class/program that takes as input a Roman Numeral and converts it to a normal number. There is no need to convert numbers larger than 3000.
 
 ## Results
 
 You'll need npm installed. After that, run:
 - `npm ci` to install dependencies
-- `npm run wordchain <start-word> <end-word>`
-
-## Example output:
-
-```
-> npm run wordchain duck ruby
-
-Reading wordlist
- -> 14ms to complete task
-
-Creating from and to leafs
- -> 1ms to complete task
-
-Gathering paths for a maximum of 1 steps
- -> 6ms to complete task
-
-Gathering paths for a maximum of 2 steps
- -> 37ms to complete task
-
-Gathering paths for a maximum of 3 steps
- -> 143ms to complete task
-
-Gathering paths for a maximum of 4 steps
- -> 331ms to complete task
-
-Gathering paths for a maximum of 5 steps
- -> 1038ms to complete task
-
-Shortest path(s):
- - duck -> dunk -> dun -> dub -> rub -> ruby
- - duck -> dunk -> dun -> run -> rub -> ruby
- - duck -> dunk -> dune -> rune -> rube -> ruby
- - duck -> dusk -> rusk -> ruse -> rube -> ruby
- - duck -> ruck -> rusk -> ruse -> rube -> ruby
-
- Done => 1571ms to finish
-```
+- `npm run numera sample` => run against roman.txt
+- `npm run numera 1234` => convert a number to roman value
+- `npm run numera DCCL` => convert a roman value to number
+- `npm run numera 1:3000` => convert range to roman values
