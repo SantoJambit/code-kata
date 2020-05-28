@@ -39,6 +39,25 @@ The rules are simple:
 - The function should be case-insensitive  
 - Show the output
 
+## Examples
+
+```
+>>> can_make_word("A")
+True
+>>> can_make_word("BARK")
+True
+>>> can_make_word("BOOK")
+False
+>>> can_make_word("TREAT")
+True
+>>> can_make_word("COMMON")
+False
+>>> can_make_word("SQUAD")
+True
+>>> can_make_word("CONFUSE")
+True
+```
+
 ## Results
 
 You'll need npm installed. After that, run:
