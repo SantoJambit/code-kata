@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "numera": "ts-node src/roman-numera.ts"
+    "test": "ts-node src/plausible.ts"
   },
   "author": "",
   "license": "ISC",
