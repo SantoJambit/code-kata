@@ -1,22 +1,46 @@
 # jambit-kata
-Jambit Code-Kata Roman Numerals
+Jambit Code-Kata ABC Blocks
 
-## Tasks
+## Task
 
-We all know Roman Numerals, if not take a quick look at: http://www.novaroma.org/via_romana/numbers.html
+You are given a collection of ABC blocks. There are twenty blocks with two letters on each block. A complete alphabet is guaranteed amongst all sides of the blocks. 
 
-1. **Convert normal numbers to Roman Numerals**\
-Write a function/method/class/program that takes as input a normal number and converts it to a Roman numeral.
-2. **Convert Roman Numerals to normal number**\
-Write a function/method/class/program that takes as input a Roman Numeral and converts it to a normal number.
+The sample collection of blocks:
 
-There is no need to convert numbers larger than 3000.
+```
+(B O)
+(X K)
+(D Q)
+(C P)
+(N A)
+(G T)
+(R E)
+(T G)
+(Q D)
+(F S)
+(J W)
+(H U)
+(V I)
+(A N)
+(O B)
+(E R)
+(F S)
+(L Y)
+(P C)
+(Z M)
+```
+
+Write a function that takes a string (word) and determines whether the word can be spelled with the given collection of blocks.
+
+
+The rules are simple:
+
+- Once a letter on a block is used that block cannot be used again  
+- The function should be case-insensitive  
+- Show the output
 
 ## Results
 
 You'll need npm installed. After that, run:
 - `npm ci` to install dependencies
-- `npm run numera sample` => run against roman.txt
-- `npm run numera 1234` => convert a number to roman value
-- `npm run numera DCCL` => convert a roman value to number
-- `npm run numera 1:3000` => convert range to roman values
+- `npm t` to start test runner
