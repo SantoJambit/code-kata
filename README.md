@@ -1,22 +1,22 @@
 # jambit-kata
-Jambit Code-Kata Roman Numerals
+Jambit Code-Kata I before E except after C
 
-## Tasks
+## Task
 
-We all know Roman Numerals, if not take a quick look at: http://www.novaroma.org/via_romana/numbers.html
+The phrase ["I before E except after C"](https://en.wikipedia.org/wiki/I_before_E_except_after_C) is a widely known mnemonic which is supposed to help when spelling English words.
 
-1. **Convert normal numbers to Roman Numerals**\
-Write a function/method/class/program that takes as input a normal number and converts it to a Roman numeral.
-2. **Convert Roman Numerals to normal number**\
-Write a function/method/class/program that takes as input a Roman Numeral and converts it to a normal number.
+Using the wordlist from: http://wiki.puzzlers.org/pub/wordlists/unixdict.txt, check if the two sub-clauses of the phrase are plausible individually:
 
-There is no need to convert numbers larger than 3000.
+- "I before E when not preceded by C"
+- "E before I when preceded by C"
+
+If both sub-phrases are plausible then the original phrase can be said to be plausible.
+
+Something is plausible if the number of words having the feature is more than two times the number of words having the opposite feature (where
+feature is 'ie' or 'ei' preceded or not by 'c' as appropriate).
 
 ## Results
 
 You'll need npm installed. After that, run:
 - `npm ci` to install dependencies
-- `npm run numera sample` => run against roman.txt
-- `npm run numera 1234` => convert a number to roman value
-- `npm run numera DCCL` => convert a roman value to number
-- `npm run numera 1:3000` => convert range to roman values
+- `npm t` => run plausibility check
