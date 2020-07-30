@@ -34,7 +34,7 @@ export function findDropColumns(maze: string[][], columnIndex: number, rowIndex:
     }
     return positions;
 }
-function flatDeep(arr, d = 1) {
+function flatDeep<T>(arr: T[], d = 1) {
     return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
                  : arr.slice();
  };
@@ -45,7 +45,9 @@ export function findOutColumns(maze: string[][], columnIndex: number, rowIndex: 
         return [columnIndex];
     }
     const columns = findDropColumns(maze, columnIndex, nextRow+1);
-    return flatDeep(columns.map((col) => findOutColumns(maze, col, nextRow+1)));
+    const flattened: number[] = flatDeep(columns.map((col) => findOutColumns(maze, col, nextRow+1)));
+    // only unique and sorted by order
+    return flattened.filter((item, pos) => flattened.indexOf(item) === pos).sort((a, b) => a - b);
 }
 
 export function marbleResults(maze: string[][]) {
