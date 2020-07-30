@@ -1,0 +1,5 @@
+X XXX
+XX XX
+XXX X
+------
+1: 
