@@ -3,7 +3,7 @@ Jambit Code-Kata Wabbit-Hunt
 
 ## Description
 
-<a href="https://www.flickr.com/photos/mark_gilmour/5480561182" title="Bugs Bunny and Elmer Fudd by Mark Gilmour" style="display: block; float: right; margin-left: 30px; width: 50%; max-width: 400px;"><img alt="Bugs Bunny and Elmer Fudd by Mark Gilmour" src="https://live.staticflickr.com/5300/5480561182_e44bba51de_c.jpg" style="width: 100%" /></a>
+<a href="https://www.flickr.com/photos/mark_gilmour/5480561182" title="Bugs Bunny and Elmer Fudd by Mark Gilmour"><img alt="Bugs Bunny and Elmer Fudd by Mark Gilmour" src="https://live.staticflickr.com/5300/5480561182_e44bba51de_c.jpg" align="right" width="400" /></a>
 A good hunter kills two wabbits with one shot. Of course, it can be easily done since for any two points we can always draw a line containing the both. But killing three or more wabbits in one shot is much more difficult task. To be the best hunter in the world one should be able to kill the maximal possible number of wabbits. Assume that wabbit is a point on the plane with integer x and y coordinates. Having a set of wabbits you are to find the largest number of wabbits that can be killed with single shot, i.e. maximum number of points lying exactly on the same line. No two wabbits sit at one point.
 
 ### Input
