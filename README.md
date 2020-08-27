@@ -1,105 +1,102 @@
 # jambit-kata
-Jambit Code-Kata Marble-Maze
+Jambit Code-Kata Wabbit-Hunt
 
 ## Description
 
-Original idea by Gernot Pointner, slightly modified for simplification.
+<a href="https://www.flickr.com/photos/mark_gilmour/5480561182" title="Bugs Bunny and Elmer Fudd by Mark Gilmour" style="display: block; float: right; margin-left: 30px; width: 50%; max-width: 400px;"><img alt="Bugs Bunny and Elmer Fudd by Mark Gilmour" src="https://live.staticflickr.com/5300/5480561182_e44bba51de_c.jpg" style="width: 100%" /></a>
+A good hunter kills two wabbits with one shot. Of course, it can be easily done since for any two points we can always draw a line containing the both. But killing three or more wabbits in one shot is much more difficult task. To be the best hunter in the world one should be able to kill the maximal possible number of wabbits. Assume that wabbit is a point on the plane with integer x and y coordinates. Having a set of wabbits you are to find the largest number of wabbits that can be killed with single shot, i.e. maximum number of points lying exactly on the same line. No two wabbits sit at one point.
 
-Given is a box with a maze inside of it. This maze is given to you as a text file. The first row of the text file describes the input positions for a marble and the last row of the text file describes the (maybe) output positions of the marble, which was insert. A text file could look like this:
+### Input
 
-```
-XX XXXXX XXXXXXXXXXXXXX XXXX
-X  XXXXX XXXXXXXXXXXXXX XXXX
-X XXXXXX     XXXXXX       XX
-X XXXXXXXX XXXXXXXXXX XXXXXX
-X  XXXXXXXXXXXXXXXXXX XXXXXX
-XX XXXXXXXXXXXXXXXXXX XXXXXX
-```
+An input contains an integer N (3 ≤ N ≤ 200) specifying the number of wabbits. Each of the next N lines in the input contains the x coordinate and the y coordinate (in this order) separated by a space (−2000 ≤ x, y ≤ 2000).
 
-As you can see
+### Output
 
-- Input 1 leads to output 1 - the left way
-- Input 2 leads to nothing - the middle way
-- Input 3 leads to output 2 - the right way
+The output contains the maximal number of wabbits situated in one line.
 
-Textfile
+## Examples
 
-- X -means wall
-- ' ' (Space) means 'a way' - where the marble can roll on
-
-Inputs
-
-- are the first row
-- numbered from left to right beginning with 1
-
-Outputs
-
-- are the last row
-- numbered from left to right beginning with 1
-
-## Task
-
-Write an application which generates for a maze (given as a text file), a description which inputs leads to which outputs.
-
-e.g.
-
-Input 1 → Output 1
-
-Input 2 → None
-
-Input 3 → Output 2, 3
-
-
-## Notes
-
- - the text file is the side view of the maze
-  - that means you put in a marble on top and the marble is rolling/falling down
- - a marble can't roll up
-  - The following will not lead to an output
+### Example 1
 
 ```
-X XXXXX
-X X   X
-X   X X
-XXXXX X
+7
+11 190
+8 139
+12 190
+7 122
+11 173
+0 3
+10 156
 ```
 
-- a marble always rolls, if a way is available
-  - means the marble will go left or right (50% / 50%) and will not rest
+<details><summary>Show/Hide Result</summary>
 
 ```
-XXXXXXXXXXXXXX XXXXXXXXXXXXXX
-X                           X
-X XXXXXXXXXXXXXXXXXXXXXXXXX X
+5 // straight line and a stray bunny
 ```
+</details>
 
-- ways can split up or merge together
-- A marble can't go slantwise, that means, the following creates no way (only 90° turns are allowed - no 45°)
 
-```
-X XXX
-XX XX
-XXX X
-```
-
-- Not all ways are used by the marble
-  - in this example the output 1 (the left one) and output 4 (the right one) is something the marble can't reach (because the marble will go down before → can't jump over holes)
+### Example 2
 
 ```
-XXXXXXXXXXXX XXXXXXXXXXXXXXX
-X                          X
-XX XXXXX XXXXXX XXXXXXXXX XX
+7
+11 190
+8 139
+12 190
+7 122
+11 173
+0 3
+10 156
 ```
 
-- marbles fall straight down (there are no side g-forces)
-  - the exit left and the exit right is something the marble can't reach (only the exit in the middle (→ straight falling down)
+<details><summary>Show/Hide Result</summary>
 
 ```
-XXXXX XXXXXX
-X          X
-X          X
-X          X
-X XXX XXXX X
+4 // two parallel lines, but one is longer
+```
+</details>
+
+
+### Example 3
+
+
+```
+7
+0 10
+10 173
+11 190
+0 200
+-100 1
+0 100
+0 400
 ```
 
-- A marble is nearly as big as an 'X' 
+<details><summary>Show/Hide Result</summary>
+
+```
+4 // a vertical line is a special case depending on your algorithm
+```
+</details>
+
+
+### Example 4
+
+```
+8
+7 122
+8 139
+8 173
+9 156
+10 173
+10 139
+11 122
+12 105
+```
+
+<details><summary>Show/Hide Result</summary>
+
+```
+5 // one point is shared by a crossing line in opposite direction
+```
+</details>
