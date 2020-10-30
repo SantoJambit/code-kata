@@ -1,102 +1,72 @@
 # jambit-kata
-Jambit Code-Kata Wabbit-Hunt
+Jambit Code-Kata Water Towers
 
 ## Description
 
-<a href="https://www.flickr.com/photos/mark_gilmour/5480561182" title="Bugs Bunny and Elmer Fudd by Mark Gilmour"><img alt="Bugs Bunny and Elmer Fudd by Mark Gilmour" src="https://live.staticflickr.com/5300/5480561182_e44bba51de_c.jpg" align="right" width="400" /></a>
-A good hunter kills two wabbits with one shot. Of course, it can be easily done since for any two points we can always draw a line containing the both. But killing three or more wabbits in one shot is much more difficult task. To be the best hunter in the world one should be able to kill the maximal possible number of wabbits. Assume that wabbit is a point on the plane with integer x and y coordinates. Having a set of wabbits you are to find the largest number of wabbits that can be killed with single shot, i.e. maximum number of points lying exactly on the same line. No two wabbits sit at one point.
+In a two dimensional world, there is a place where some towers were build. When it rains for a long time, all convex enclosures are completely filled with water.
 
-### Input
 
-An input contains an integer N (3 ≤ N ≤ 200) specifying the number of wabbits. Each of the next N lines in the input contains the x coordinate and the y coordinate (in this order) separated by a space (−2000 ≤ x, y ≤ 2000).
+### Task
+
+Write a method/function to calculate the amount of collected water (in Units), which is collected between the towers.
 
 ### Output
 
-The output contains the maximal number of wabbits situated in one line.
+If you have enough time, create a visualization :)
+
+- in text mode
+- in graphic mode with animated water ;) (in 3D (big grin) with hardware acceleration [OpenGL/Vulkan/DirectX])
 
 ## Examples
 
 ### Example 1
 
+Input
 ```
-7
-11 190
-8 139
-12 190
-7 122
-11 173
-0 3
-10 156
+[5, 3, 7, 2, 6, 4, 5, 9, 1, 2]
 ```
 
-<details><summary>Show/Hide Result</summary>
-
 ```
-5 // straight line and a stray bunny
-```
-</details>
-
-
-### Example 2
-
-```
-7
-11 190
-8 139
-12 190
-7 122
-11 173
-0 3
-10 156
+9               ██
+8               ██
+7     ██≈≈≈≈≈≈≈≈██
+6     ██≈≈██≈≈≈≈██
+5 ██≈≈██≈≈██≈≈████
+4 ██≈≈██≈≈████████
+3 ██████≈≈████████
+2 ████████████████≈≈██
+1 ████████████████████
 ```
 
-<details><summary>Show/Hide Result</summary>
 
-```
-4 // two parallel lines, but one is longer
-```
-</details>
+### Example Data
 
-
-### Example 3
-
-
-```
-7
-0 10
-10 173
-11 190
-0 200
--100 1
-0 100
-0 400
+input levels
+```json
+[
+    [1, 5, 3, 7, 2],
+    [5, 3, 7, 2, 6, 4, 5, 9, 1, 2],
+    [2, 6, 3, 5, 2, 8, 1, 4, 2, 2, 5, 3, 5, 7, 4, 1],
+    [5, 5, 5, 5],
+    [5, 6, 7, 8],
+    [8, 7, 7, 6],
+    [6, 7, 10, 7, 6],
+]
 ```
 
 <details><summary>Show/Hide Result</summary>
 
 ```
-4 // a vertical line is a special case depending on your algorithm
+[
+    2,
+    14,
+    35,
+    0,
+    0,
+    0,
+    0,
+];
+
 ```
 </details>
 
-
-### Example 4
-
-```
-8
-7 122
-8 139
-8 173
-9 156
-10 173
-10 139
-11 122
-12 105
-```
-
-<details><summary>Show/Hide Result</summary>
-
-```
-5 // one point is shared by a crossing line in opposite direction
-```
-</details>
